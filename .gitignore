@@ -134,3 +134,6 @@ dmypy.json
 # VSCode files
 .vscode
 tempCodeRunnerFile.py
+
+# django local settings
+local_settings.py
