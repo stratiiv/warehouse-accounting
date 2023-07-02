@@ -137,3 +137,6 @@ tempCodeRunnerFile.py
 
 # django local settings
 local_settings.py
+
+#media folder 
+media
