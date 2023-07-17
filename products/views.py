@@ -1,23 +1,14 @@
-from rest_framework.viewsets import ModelViewSet
-from .serializers import ProductSerializer, CategorySerializer
+from django.views.generic import ListView
 from .models import Product, Category
 
 
-class ProductViewSet(ModelViewSet):
-    """Provides CRUD endpoints on Product"""
-    serializer_class = ProductSerializer
+class ProductListView(ListView):
     queryset = Product.objects.all()
-
-    def perform_create(self, serializer):
-        """Auto add current user when creating product"""
-        serializer.save(user=self.request.user)
-
-    def perform_update(self, serializer):
-        """Auto add current user when updating product"""
-        serializer.save(user=self.request.user)
+    context_object_name = "product_list"
+    template_name = "products/product_list.html"
 
 
-class CategoryViewSet(ModelViewSet):
-    """Provides CRUD endpoints on Category"""
-    serializer_class = CategorySerializer
+class CategoryListView(ListView):
     queryset = Category.objects.all()
+    context_object_name = "category_list"
+    template_name = "products/category_list.html"
