@@ -14,6 +14,10 @@ urlpatterns = [
     path('products/add/', views.ProductCreateView.as_view(), name="product-add"),
     path('products/<int:pk>/delete/', views.ProductDeleteView.as_view(), name="product-delete"),
     path('products/<int:pk>/update/', views.ProductUpdateView.as_view(), name="product-update"),
+    path('categories/list/', views.CategoryListView.as_view(), name="category-list"),
+    path('categories/add/', views.CategoryCreateView.as_view(), name="category-add"),
+    path('categories/<int:pk>/delete/', views.CategoryDeleteView.as_view(), name="category-delete"),
+    path('categories/<int:pk>/update/', views.CategoryUpdateView.as_view(), name="category-update"),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
