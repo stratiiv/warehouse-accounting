@@ -7,27 +7,39 @@
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Preview</th>
-                <th class="w-25" scope="col"></th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            {% for product in product_list %}
-                <tr>
-                    <th scope="row">{{ product.id }}</th>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>
-                        <img src="{{ product.preview.url }}" alt="Preview image">
-                    </td>
-                    <td class="text-center">
-                        <a href="{% url 'product-update' product.id %}" class="btn btn-success">Update</a>
-                        <a href="{% url 'product-delete' product.id %}" class="btn btn-danger">Delete</a>
-                        {% comment %} <form method="get" action="{% url 'product-delete' product.id %}" style="display: inline;">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form> {% endcomment %}
-                    </td>
+                <th scope="col" style="width:600px;">
+                    <form action="{% url 'product-search' %}" method="GET">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control"
+                                       type="search"
+                                       placeholder="Search by name or category"
+                                       name="q"
+                                       aria-label="Search">
+                                    </div>
+                                <div class="col">
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endblock content %}
+            </thead>
+            <tbody class="table-group-divider">
+                {% for product in product_list %}
+                    <tr>
+                        <th scope="row">{{ product.id }}</th>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>
+                            <img src="{{ product.preview.url }}" alt="Preview image">
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'product-update' product.id %}" class="btn btn-success">Update</a>
+                            <a href="{% url 'product-delete' product.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endblock content %}

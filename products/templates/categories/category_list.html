@@ -6,7 +6,22 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th class="w-25" scope="col"></th>
+                 <th scope="col" style="width:600px;">
+                    <form action="{% url 'category-search' %}" method="GET">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control"
+                                       type="search"
+                                       placeholder="Search by name or description"
+                                       name="q"
+                                       aria-label="Search">
+                                    </div>
+                                <div class="col">
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
