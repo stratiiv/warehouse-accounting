@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'products',
     # 3rd party
     'rest_framework',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,12 @@ MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+
+# crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # importing local settings if present
 try:

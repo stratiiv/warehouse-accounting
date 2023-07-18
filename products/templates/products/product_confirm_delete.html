@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-3" style="width:500px">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Confirm Deletion</h5>
+                        <p class="card-text">Are you sure you want to remove this product?</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                            <a href="{% url 'product-list' %}" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+
+    </div>
+{% endblock %}
