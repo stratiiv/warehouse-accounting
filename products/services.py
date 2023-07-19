@@ -18,8 +18,10 @@ def generate_preview_image(image_data: bytes, image_name: str) -> str:
     """
     preview_filename = f"preview_{os.path.basename(image_name)}"
     preview_filename = os.path.splitext(preview_filename)[0] + ".png"
-    preview_directory = os.path.join(settings.MEDIA_ROOT, 'products', 'previews')
-    os.makedirs(preview_directory, exist_ok=True)  # Create the directory if it doesn't exist
+    preview_directory = os.path.join(settings.MEDIA_ROOT, 'products',
+                                     'previews')
+    # Create the directory if it doesn't exist
+    os.makedirs(preview_directory, exist_ok=True)
 
     with Image.open(BytesIO(image_data)) as im:
         im.convert("RGB")
@@ -27,7 +29,8 @@ def generate_preview_image(image_data: bytes, image_name: str) -> str:
         preview_path = os.path.join(preview_directory, preview_filename)
         im.save(preview_path, "PNG")
 
-    return os.path.join('products', 'previews', preview_filename).replace("\\", "/")
+    return os.path.join('products', 'previews', preview_filename).replace("\\",
+                                                                          "/")
 
 
 def validate_image(image):
