@@ -42,11 +42,14 @@ INSTALLED_APPS = [
     'products',
     # 3rd party
     'rest_framework',
+    'rest_framework.authtoken',
     'crispy_forms',
     'crispy_bootstrap5',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'dj_rest_auth'
+
 ]
 
 MIDDLEWARE = [
