@@ -28,9 +28,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         """Generate image preview before saving."""
-        image_data = self.image.read()  # Read the image data
-        preview_path = generate_preview_image(image_data, self.image.name)
-        self.preview = preview_path
+        self.preview = generate_preview_image(self.image)
         super().save(*args, **kwargs)
 
     def __str__(self):
