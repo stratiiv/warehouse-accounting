@@ -1,0 +1,11 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+*.sqlite3
+*.sqlite3-journal
+__pycache__/
+media
+Pipfile
+Pipfile.lock
+config/local_settings.py
