@@ -1,24 +1,34 @@
-from django.test import TestCase
+from tempfile import TemporaryDirectory
+
+from django.test import TestCase, override_settings
 from django.core.exceptions import ValidationError
 from django.core.files import File
-from io import BytesIO
-from PIL import Image
-from django.core.files.uploadedfile import SimpleUploadedFile
-from products.services import (generate_preview_image, validate_image,
-                               SIZE_LIMIT, PREVIEW_SIZE)
+
+from products.services import generate_preview_image, validate_image
+from .helpers import create_test_image
+
+TEMP_DIR = TemporaryDirectory()
 
 
+@override_settings(MEDIA_ROOT=TEMP_DIR.name)
 class ServicesTest(TestCase):
+    def setUp(self):
+        self.image = create_test_image()
+
     def test_preview_generation(self):
-        test_image = Image.new('RGB', size=(200, 200), color='red')
-        image_io = BytesIO()
-        test_image.save(image_io, format='JPEG')
-        image_io.seek(0)
-        image = SimpleUploadedFile('test_image.jpg', image_io.read(),
-                                   content_type='image/jpeg')
-        preview = generate_preview_image(image)
+        preview = generate_preview_image(self.image)
         self.assertTrue(preview)
         self.assertTrue(isinstance(preview, File))
 
-    
-    
+    def test_valid_image_size_validation(self):
+        validate_image(self.image)
+
+    def test_too_large_image_size_validation(self):
+        self.image.name = 'large_image.jpg'
+        self.image.size = 11 * 1024 * 1024
+        with self.assertRaises(ValidationError):
+            validate_image(self.image)
+
+    @classmethod
+    def tearDownClass(cls):
+        TEMP_DIR.cleanup()
